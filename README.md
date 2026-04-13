@@ -119,16 +119,6 @@ No Windows:
 War.exe
 ```
 
-## Possíveis melhorias
-
-Algumas melhorias que podem ser feitas no futuro:
-
-- permitir nomes com espaço
-- editar ou remover territórios
-- aumentar o limite de territórios
-- validar melhor a entrada da quantidade de tropas
-- organizar o código em funções separadas
-
 ## Arquivo principal
 
 O código-fonte principal está em [War.c](./War.c).
