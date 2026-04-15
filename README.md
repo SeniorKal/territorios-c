@@ -123,3 +123,6 @@ No Linux ou macOS:
 ./War
 ```
 
+📌 Author
+
+Kauê de Figueiredo
