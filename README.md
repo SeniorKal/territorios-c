@@ -1,117 +1,115 @@
-# Cadastro de Territórios em C
+# Projeto War em C
 
-Este projeto é um programa simples em linguagem C inspirado no jogo War. Ele permite cadastrar territórios com nome, cor e quantidade de tropas, além de listar os territórios já registrados.
+Este projeto implementa uma simulacao simples de batalha entre territorios inspirada no jogo War.
 
-O objetivo do código é praticar conceitos básicos de programação em C, como:
+O estado atual deste repositorio corresponde ao nivel `aventureiro` da atividade. Nesta etapa, o foco foi sair de uma versao basica com vetor fixo e evoluir para uma implementacao com alocacao dinamica, funcoes separadas e logica de ataque entre territorios.
+
+## Nivel atual: Aventureiro
+
+Nesta versao, o programa ja atende os principais requisitos pedidos para a simulacao:
+
+- cadastro de territorios com `nome`, `cor` e `tropas`
+- uso de `struct Territorio`
+- alocacao dinamica de memoria com `calloc`
+- acesso aos dados por ponteiros
+- menu interativo no terminal
+- exibicao dos territorios cadastrados
+- simulacao de ataque com dados aleatorios
+- atualizacao de cor e tropas apos a batalha
+- liberacao da memoria com `free`
+
+## Objetivo de aprendizagem
+
+Este commit foi construido para praticar conceitos importantes da linguagem C:
 
 - `struct`
-- vetores
-- `while`
-- `if` e `else`
-- entrada de dados com `scanf`
-- laços de repetição com `for`
+- ponteiros
+- alocacao dinamica
+- vetores de estruturas
+- funcoes com parametros
+- validacao de entrada
+- `rand` e `srand`
+- organizacao modular do codigo
 
 ## Como o programa funciona
 
-O programa mostra um menu com 3 opções:
+Ao iniciar, o programa pede ao usuario o numero total de territorios que serao criados.
 
-1. Adicionar território
-2. Mostrar territórios
-3. Sair
+Depois disso, ele apresenta um menu com as opcoes:
 
-Quando o usuário escolhe adicionar um território, o programa pede:
+1. Cadastrar territorios
+2. Mostrar territorios
+3. Atacar territorio
+4. Sair
 
-- nome do território
-- cor do território
+Na opcao de cadastro, o usuario informa:
+
+- nome do territorio
+- cor do exercito
 - quantidade de tropas
 
-Essas informações são armazenadas em um vetor com espaço para até 5 territórios.
+Na opcao de ataque:
 
-Se o usuário escolher mostrar territórios, o programa percorre o vetor e exibe apenas os territórios que já foram cadastrados.
+- o usuario escolhe um territorio atacante
+- o usuario escolhe um territorio defensor
+- cada lado rola um dado com valor entre `1` e `6`
+- se o atacante vencer, o territorio defensor passa a ter a mesma cor do atacante
+- parte das tropas do atacante e transferida para o territorio conquistado
+- se o atacante perder, ele perde uma tropa
 
-## Estrutura do código
+## Estrutura do codigo
 
-### `struct Territorio`
+O arquivo principal do projeto e [War.c](./War.c).
 
-Essa estrutura agrupa os dados de cada território:
+As funcoes principais sao:
 
-```c
-typedef struct
-{
-    char nome[30];
-    char cor[10];
-    int tropas;
-} Territorio;
-```
+- `exibirMenu()`: mostra as opcoes do sistema
+- `limparEntrada()`: limpa o buffer do teclado
+- `lerInteiro()`: le numeros com validacao
+- `cadastrarTerritorios()`: registra os territorios no vetor dinamico
+- `exibirTerritorios()`: mostra os dados atuais do mapa
+- `rolarDado()`: gera um numero aleatorio entre 1 e 6
+- `atacar()`: executa a batalha entre dois territorios
+- `liberarMemoria()`: libera a memoria alocada
 
-Cada território possui:
-
-- `nome`: nome do território
-- `cor`: cor associada ao território
-- `tropas`: quantidade de tropas no território
-
-## Lógica principal
-
-No `main()`, o programa usa:
-
-- `escolha` para guardar a opção digitada no menu
-- `total` para controlar quantos territórios já foram cadastrados
-- `territorios[5]` para armazenar até 5 registros
-
-O menu roda dentro de um `while`, repetindo até o usuário escolher a opção `3`.
-
-## Cuidados implementados no código
-
-O programa também possui algumas proteções importantes:
-
-- impede cadastrar mais de 5 territórios
-- trata entrada inválida no menu
-- limita o tamanho das strings lidas com `scanf`
-
-Esses limites evitam problemas como travamento do programa e estouro de memória.
-
-## Exemplo de uso
+## Exemplo de fluxo
 
 ```text
-==========/WAR TERRITORIOS/=========
-1. Adicionar territorio
-2. Mostrar territorios
-3. Sair
-Escolha uma opcao: 1
-Nome: Brasil
-Cor: Verde
-Tropas: 10
+Informe o numero total de territorios: 2
 
-==========/WAR TERRITORIOS/=========
-1. Adicionar territorio
+========== WAR TERRITORIOS ==========
+1. Cadastrar territorios
 2. Mostrar territorios
-3. Sair
-Escolha uma opcao: 2
-Territorios cadastrados:
-Nome: Brasil, Cor: Verde, Tropas: 10
+3. Atacar territorio
+4. Sair
+Escolha uma opcao: 1
+
+Cadastro do territorio 1
+Nome: Brasil
+Cor do exercito: Verde
+Quantidade de tropas: 10
+
+Cadastro do territorio 2
+Nome: Argentina
+Cor do exercito: Azul
+Quantidade de tropas: 8
 ```
 
 ## Como compilar
 
-Se você estiver usando `gcc`, compile com:
-
-```bash
-gcc War.c -o War
-```
-
-No Windows, também pode gerar um executável com:
+No Windows:
 
 ```bash
 gcc War.c -o War.exe
 ```
 
-## Como executar
-
 No Linux ou macOS:
 
 ```bash
-./War
+gcc War.c -o War
 ```
+
+## Como executar
 
 No Windows:
 
@@ -119,6 +117,9 @@ No Windows:
 War.exe
 ```
 
-## Arquivo principal
+No Linux ou macOS:
 
-O código-fonte principal está em [War.c](./War.c).
+```bash
+./War
+```
+
